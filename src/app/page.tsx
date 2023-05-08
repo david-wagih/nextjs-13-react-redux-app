@@ -1,80 +1,25 @@
-// want to design a login page
 "use client";
 
+import { decrement, increment, reset } from "@/redux/features/counterSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+
 export default function Home() {
-  return (
-    <div>
-      <Login />
-    </div>
-  );
-}
+  const count = useAppSelector((state) => state.counterReducer.value);
+  const dispatch = useAppDispatch();
 
-function handleSubmit(e: any) {
-  e.preventDefault();
-  console.log(e.target.username.value);
-  console.log(e.target.password.value);
-}
-
-function Login() {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "50%",
-        margin: "auto",
-      }}
-    >
-      <h1>Login</h1>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "50%",
-          margin: "auto",
-          justifyContent: "space-between",
-          alignContent: "center",
-        }}
-      >
-        <label htmlFor="username">Username</label>
-        <input
-          style={{
-            width: "100%",
-            padding: "5px",
-            marginTop: "10px",
-            marginBottom: "10px",
-            borderRadius: "5px",
-            border: "1px solid black",
-          }}
-          type="text"
-          id="username"
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          style={{
-            width: "100%",
-            padding: "5px",
-            marginTop: "10px",
-            marginBottom: "10px",
-            borderRadius: "5px",
-            border: "1px solid black",
-          }}
-        />
+    <main style={{ maxWidth: 1200, marginInline: "auto", padding: 20 }}>
+      <div style={{ marginBottom: "4rem", textAlign: "center" }}>
+        <h4 style={{ marginBottom: 16 }}>{count}</h4>
+        <button onClick={() => dispatch(increment())}>increment</button>
         <button
-          type="submit"
-          style={{
-            width: "50%",
-            margin: "auto",
-            padding: "10px",
-            marginTop: "10px",
-          }}
+          onClick={() => dispatch(decrement())}
+          style={{ marginInline: 16 }}
         >
-          Login
+          decrement
         </button>
-      </form>
-    </div>
+        <button onClick={() => dispatch(reset())}>reset</button>
+      </div>
+    </main>
   );
 }
