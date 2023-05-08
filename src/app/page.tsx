@@ -1,5 +1,7 @@
 "use client";
 
+// here is the very first page that appears to the user when they visit the site
+
 import { decrement, increment, reset } from "@/redux/features/counterSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
